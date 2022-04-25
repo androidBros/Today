@@ -48,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onBackPressed(){
+        if(getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView) == day){
+            finish();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
     public void onChangeFragment(int index){
         if (index == 0){ // 홈으로 오게 당일 일정 뜨는 거
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, day).addToBackStack(null).commit();
