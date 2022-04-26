@@ -1,12 +1,19 @@
 package org.techtown.today;
 
+import android.app.DatePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +31,21 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase database;
     String taskTable = "tasktable";
 
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+    Calendar myCalendar = Calendar.getInstance();
+
+    DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // 캘린더 띄우기
+        day_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(MainActivity.this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         //임시로
         today_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,12 +93,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // DB 테이블 생성
-//        database = openOrCreateDatabase(taskDB, MODE_PRIVATE, null);
-//        createTable(taskDB);
+        getTime();
         createDatabase();
 
     }
+
+
+    private void updateLabel() {
+        String myFormat = "yyyy-MM-dd";    // 출력형식   2021/07/26
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+
+
+        day_btn.setText(sdf.format(myCalendar.getTime()));
+    }
+
+
+    // 현재 시간 얻기
+    private void getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        day_btn.setText(mFormat.format(mDate));
+    }
+
 
     //DB 생성
     private void createDatabase(){
@@ -92,9 +137,10 @@ public class MainActivity extends AppCompatActivity {
 
             database.execSQL("CREATE TABLE if not exists " + taskTable + "("
                     + "_id integer PRIMARY KEY autoincrement,"
-                    + "startdate date,"
-                    + "enddate date,"
-                    + "day string,"
+                    + "startdate date(8),"
+                    + "enddate date(8),"
+                    + "day String,"
+                    + "task TEXT,"
                     + "exe boolean)");
             Log.d("DB Create", "--------------------DB 테이블 생성 ----------------------");
         }
@@ -119,9 +165,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             database.execSQL("insert into " + taskTable
-                    + "(startdate, enddate, day, exe)"
+                    + "(startdate, enddate, day,task, exe)"
                     + "values"
-                    +"(2022-04-26, 2022-04-26, 13, 1)");
+                    +"(20220426, 20220426, 13, '차선호 왕꼬추 왕부랄 왕꼭지 뿌잉뿌잉 복숭아 뼈 골절 oh my god~~~@@#!$% 1213312312', 1)");
             Log.d("DB Create", "--------------------DB insert 성공----------------------");
 
         }catch (Exception e){
