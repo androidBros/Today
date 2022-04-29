@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/user/Documents/GitHub/Today/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/user/Documents/GitHub/Today/app/src/main/res/layout/task_item_view.xml" value="0.1125" />
         <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/activity_main.xml" value="0.29375" />
         <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/fragment_add_schedule.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/fragment_add_short.xml" value="0.2838541666666667" />
@@ -11,5 +13,5 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

@@ -67,7 +67,6 @@ public class add_short extends Fragment {
 
                 }
 
-
             }
         });
 

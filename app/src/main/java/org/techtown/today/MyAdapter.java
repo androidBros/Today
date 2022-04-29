@@ -39,11 +39,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         return listData.size();
     }
 
-    public void addItem(Data data) {
+    void addItem(Data data) {
         // 외부에서 item을 추가시킬 함수입니다.
-        Log.d("recycle_day","addItem 호출됨-------------------------------------");
+        Log.d("recycle_day","addItem 호출됨-------------------------------------"+data.getTask()+" / "+data.getCheck());
         listData.add(data);
-        
+        Log.d("recycle_day","add 함수까지 호출됨-------------------------------------");
     }
 
     // RecyclerView의 핵심인 ViewHolder 입니다.

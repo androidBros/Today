@@ -19,9 +19,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public static int version = 1;
     String taskTable = "tasktable"; // 테이블 이름
 
-    day day = new day();
+    List<Integer> check_list = new ArrayList<>();
+    List<String> tasks_list = new ArrayList<>();
+
 
     public DBHelper(@Nullable Context context) {
+
         super(context, taskDB, null, version);
     }
 
@@ -53,12 +56,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 Log.d("DB Create", "--------------------DB insert faild----------------------");
                 return;
             }
-//            sqlexe = "insert into taskTable"
-//                    + "(startdate, enddate, day, task, exe)"
-//                    + "values"
-//                    + "(20220429, 20220429, 0, 'dfddfdfdf', 0)";
-//
-//            sqLiteDatabase.execSQL(sqlexe);
 
             sqlexe = "insert into taskTable"
                     + "(startdate, enddate, day, task, exe)"
@@ -80,12 +77,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void getTaskDB(String date){
-
+        check_list.clear();
+        tasks_list.clear();
         int Intdate = Integer.parseInt(date);
 
+
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        List<Integer> check_list = new ArrayList<>();
-        List<String> tasks_list = new ArrayList<>();
 
         String sqlread = "SELECT * FROM taskTable WHERE startdate = "+Intdate+" AND "+"enddate = "+Intdate;
         Log.d("DB Create", "-----------------"+sqlread);
@@ -99,10 +96,8 @@ public class DBHelper extends SQLiteOpenHelper {
             check_list.add(cursor.getInt(5));
 
         }
-
-        day.getset(check_list, tasks_list);
-
     }
+
 
 
     @Override

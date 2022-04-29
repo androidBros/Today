@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     long mNow;
     public Date mDate;
-    String nojDate;
+    public String nojDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     Calendar myCalendar = Calendar.getInstance();
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 dbHelper.getTaskDB(nojDate);
             }
         });
