@@ -43,6 +43,7 @@ public class add_short extends Fragment {
 
 
 
+
         insert_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +57,10 @@ public class add_short extends Fragment {
                 else{
 
                     //String startdate, String enddate, String day, String tasks, int exe
-                    dbHelper.insertTask(date,date,null,tasks,0);
+                    int intDate = Integer.parseInt(date);
+
+
+                    dbHelper.insertTask(intDate,intDate,0,tasks,0);
                     Toast.makeText(getActivity(),"추가되었습니다. ",Toast.LENGTH_LONG).show();
 
                     insertTask.setText("");

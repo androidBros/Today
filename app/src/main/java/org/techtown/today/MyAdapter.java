@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 // adapter에 들어갈 list 입니다.
 
-    private ArrayList<Data> listData = new ArrayList<>();
+    ArrayList<Data> listData = new ArrayList<>();
 
     @NonNull
     @Override
@@ -39,9 +39,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         return listData.size();
     }
 
-    void addItem(Data data) {
+    public void addItem(Data data) {
         // 외부에서 item을 추가시킬 함수입니다.
+        Log.d("recycle_day","addItem 호출됨-------------------------------------");
         listData.add(data);
+        
     }
 
     // RecyclerView의 핵심인 ViewHolder 입니다.
