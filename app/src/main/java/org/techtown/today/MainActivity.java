@@ -1,7 +1,6 @@
 package org.techtown.today;
 
 import android.app.DatePickerDialog;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +16,11 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+//    String sqlexe;
+//    SQLiteDatabase database;
+//    String taskTable = "tasktable"; // 테이블 이름
+    DBHelper dbHelper;
+
     Button today_btn;
     Button add_btn;
     Button back_btn;
@@ -28,11 +32,9 @@ public class MainActivity extends AppCompatActivity {
     add_short add_short; // 당일 일정 추가 화면
     add_long add_long; // 장기 일정 추가 화면
 
-    SQLiteDatabase database;
-    String taskTable = "tasktable";
 
     long mNow;
-    Date mDate;
+    public Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     Calendar myCalendar = Calendar.getInstance();
@@ -65,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         day_btn = findViewById(R.id.day_btn);
         next_btn = findViewById(R.id.next_btn);
 
+        dbHelper = new DBHelper(this);
+        //SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+
+        Log.d("MainActivity DBHelper", "--------------------DB call----------------------");
+
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,21 +89,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //임시로
-        today_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insertTask();
-                Log.d("DB Create", "--------------------오늘 버튼 클릭 ----------------------");
-            }
-        });
-
-
+//        today_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                insertTask();
+//                Log.d("DB Create", "--------------------오늘 버튼 클릭 ----------------------");
+//            }
+//        });
 
 
         getTime();
-        createDatabase();
+
+
+
+
 
     }
+
 
 
     private void updateLabel() {
@@ -115,78 +124,6 @@ public class MainActivity extends AppCompatActivity {
         day_btn.setText(mFormat.format(mDate));
     }
 
-
-    //DB 생성
-    private void createDatabase(){
-        String taskDB = "task.db"; // DB이름
-        database = openOrCreateDatabase(taskDB, MODE_PRIVATE, null);//DB가 존재하면 오픈. 존재하지않은면 생성
-        Log.d("DB Create", "--------------------DB 생성----------------------");
-        createTable();
-    }
-
-
-    private void createTable(){
-        Log.d("DB Create", "--------------------DB Create----------------------");
-
-
-        try {
-            if (database == null) {
-                Log.d("DB Create", "--------------------DB Create faild----------------------");
-                return;
-            }
-
-            database.execSQL("CREATE TABLE if not exists " + taskTable + "("
-                    + "_id integer PRIMARY KEY autoincrement,"
-                    + "startdate date(8),"
-                    + "enddate date(8),"
-                    + "day String,"
-                    + "task TEXT,"
-                    + "exe boolean)");
-            Log.d("DB Create", "--------------------DB 테이블 생성 ----------------------");
-        }
-
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-    //Date startdate, Date enddate, String day, Boolean exe
-    public void insertTask(){
-        Log.d("DB Create", "--------------------insertTask()----------------------");
-
-        try {
-            if(database ==null){
-                Log.d("DB Create", "--------------------DB insert faild----------------------");
-                return;
-            }
-            if(taskTable ==null){
-                Log.d("DB Create", "--------------------DB insert faild----------------------");
-                return;
-            }
-
-            database.execSQL("insert into " + taskTable
-                    + "(startdate, enddate, day,task, exe)"
-                    + "values"
-                    +"(20220426, 20220426, 13, '차선호 왕꼬추 왕부랄 왕꼭지 뿌잉뿌잉 복숭아 뼈 골절 oh my god~~~@@#!$% 1213312312', 1)");
-            Log.d("DB Create", "--------------------DB insert 성공----------------------");
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-//        database.execSQL("insert into" + taskTable
-//                    + "(startdate, enddate, day, exe)"
-//                    + "values"
-//                    +"("+startdate+", "+enddate+", "+day+", "+exe+")"
-//        );
-
-    }
-
-
-
-
-
-
     public void onBackPressed(){
         if(getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView) == day){
             finish();
@@ -194,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 
     public void onChangeFragment(int index){
         if (index == 0){ // 홈으로 오게 당일 일정 뜨는 거
@@ -206,6 +144,82 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, add_long).addToBackStack(null).commit();
         }
     }
+
+
+
+//    //DB 생성
+//    private void createDatabase(){
+//        String taskDB = "task.db"; // DB이름
+//        database = openOrCreateDatabase(taskDB, MODE_PRIVATE, null);//DB가 존재하면 오픈. 존재하지않은면 생성
+//        Log.d("DB Create", "--------------------DB 생성----------------------");
+//        createTable();
+//    }
+//
+//    // Table 생성
+//    private void createTable(){
+//        Log.d("DB Create", "--------------------DB Create----------------------");
+//
+//
+//        try {
+//            if (database == null) {
+//                Log.d("DB Create", "--------------------DB Create faild----------------------");
+//                return;
+//            }
+//
+//            database.execSQL("CREATE TABLE if not exists " + taskTable + "("
+//                    + "_id integer PRIMARY KEY autoincrement,"
+//                    + "startdate String,"
+//                    + "enddate String,"
+//                    + "day String,"
+//                    + "task String,"
+//                    + "exe int)");
+//            Log.d("DB Create", "--------------------DB 테이블 생성 ----------------------");
+//        }
+//
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//
+//    // Data 저장 - String startdate, String enddate, String day, String tasks, int exe
+//    public void insertTask(String startdate, String enddate, String day, String tasks, int exe){
+//        Log.d("DB Create", "--------------------insertTask()----------------------");
+//
+//        try {
+//            if(database ==null){
+//                Log.d("DB Create", "--------------------DB insert faild----------------------");
+//                return;
+//            }
+//            if(taskTable ==null){
+//                Log.d("DB Create", "--------------------DB insert faild----------------------");
+//                return;
+//            }
+//
+//
+//            sqlexe = "insert into taskTable"
+//                    + "(startdate, enddate, day, task, exe)"
+//                    + "values"
+//                    +"('"+startdate+"', '"+enddate+"', '"+day+"', '"+tasks+"', "+exe+")";
+//
+//            Log.d("DB Create", sqlexe);
+//            database.execSQL(sqlexe);
+//
+//            Log.d("DB Create", "--------------------DB insert 성공----------------------");
+//
+//
+//
+//        }catch (Exception e){
+//            Log.d("DB Create", "--------------------DB Exception----------------------");
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+
+
+
 
 
 

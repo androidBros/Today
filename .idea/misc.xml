@@ -3,14 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Administrator/Documents/GitHub/Today/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/Today/app/src/main/res/layout/fragment_add_short.xml" value="0.22760416666666666" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/Today/app/src/main/res/layout/fragment_calender.xml" value="0.31145833333333334" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/Today/app/src/main/res/layout/fragment_calenderpicker.xml" value="0.22864583333333333" />
-        <entry key="..\:/Users/Administrator/Documents/GitHub/Today/app/src/main/res/layout/fragment_datepicker.xml" value="0.3098958333333333" />
+        <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/activity_main.xml" value="0.29375" />
+        <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/fragment_add_schedule.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/fragment_add_short.xml" value="0.2838541666666667" />
+        <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/fragment_day.xml" value="0.2838541666666667" />
+        <entry key="..\:/Users/user/GitHub/Today/app/src/main/res/layout/task_item_view.xml" value="0.24114583333333334" />
       </map>
     </option>
   </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

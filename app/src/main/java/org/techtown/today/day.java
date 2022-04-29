@@ -41,6 +41,7 @@ public class day extends Fragment {
 
 
 
+    // 리사이클뷰에 데이터 적재
     public void getData() {
         List<String> listTask = Arrays.asList("국화", "사막", "수국", "해파리", "코알라");
         List<Boolean> booleanList = Arrays.asList(true,true,false,true,false);
