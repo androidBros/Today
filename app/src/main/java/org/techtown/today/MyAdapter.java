@@ -12,13 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 // adapter에 들어갈 list 입니다.
 
     ArrayList<Data> listData = new ArrayList<>();
-
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +30,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
         holder.onBind(listData.get(position));
+
+        holder.task_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    Log.d("MyAdapter", "checkbox log checked--------------------------"+holder.getItemId());
+                    Log.d("MyAdapter", "checkbox log checked--------------------------"+ compoundButton.getContext());
+                    //holder.onBind(listData.get(holder.id_));
+
+
+                }
+                else{
+                    Log.d("MyAdapter", "checkbox log not checked--------------------------"+holder.getItemId());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -54,7 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
         private CheckBox task_checkbox;
         private TextView task_item;
-
+        private int id_;
 
 
         ItemViewHolder(View itemView) {
@@ -67,28 +82,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         void onBind(Data data) {
             task_checkbox.setChecked(data.getCheck());
             task_item.setText(data.getTask());
-
+            id_ = data.getID();
+            Log.d("MyAdapter","ID-------------------------------------"+data.getID());
         }
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
-
-        holder.task_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(compoundButton.isChecked()){
-                    Log.d("MyAdapter", "checkbox log checked--------------------------"+holder+" / "+ position);
-                }
-                else{
-                    Log.d("MyAdapter", "checkbox log not checked--------------------------"+holder+" / "+ position);
-                }
-            }
-        });
-
-
-    }
 
 
 }

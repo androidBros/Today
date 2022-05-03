@@ -25,6 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
     SQLiteDatabase sqLiteDatabaseR = getReadableDatabase();
 
+
     public DBHelper(@Nullable Context context) {
 
         super(context, taskDB, null, version);
@@ -107,22 +108,22 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-//    public void updateTable(int check ,int ID){
-//        if(taskTable != null){
-//            try{
-//
-//                String updateString = "UPDATE taskTable"
-//                        + "SET"
-//                        + "exe =" + check
-//                        + "WHERE _id="+ ID;
-//                sqLiteDatabaseW.execSQL(updateString);
-//
-//            }
-//            catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    public void updateTable(int check ,int ID){
+        if(taskTable != null){
+            try{
+
+                String updateString = "UPDATE taskTable"
+                        + "SET"
+                        + "exe =" + check
+                        + "WHERE _id="+ ID;
+                sqLiteDatabaseW.execSQL(updateString);
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }

@@ -54,6 +54,7 @@ public class day extends Fragment {
             Data data = new Data();
             data.setTask(tasks_list.get(i));
             data.setID(id_list.get(i));
+
             if(check_list.get(i)==0){
                 data.setCheck(false);
             }else{
