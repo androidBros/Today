@@ -17,12 +17,13 @@ public class day extends Fragment {
 
 
     //MyAdapter adapter = new MyAdapter();
+    List<Integer> id_list = new ArrayList<>();
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("day","--------day onCreateView 실행~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!-----");
+        Log.d("day","----------------day onCreateView 실행---------------");
         ViewGroup rootView= (ViewGroup) inflater.inflate(R.layout.fragment_day, container, false);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.task_recycle);
@@ -37,19 +38,22 @@ public class day extends Fragment {
 
         DBHelper dbHelper = new DBHelper(getActivity());
         MainActivity activity = (MainActivity) getActivity();
-        Log.d("day","--------day onCreateView 실행~~~~~~-"+activity.selected_date);
+
+
         if (activity.selected_date == null){
             activity.selected_date = activity.nojDate;
         }
+
         dbHelper.getTaskDB(activity.selected_date);
+        this.id_list = dbHelper.id_list;
         this.check_list = dbHelper.check_list;
         this.tasks_list = dbHelper.tasks_list;
-        Log.d("day","--------day onCreateView 실행~~~~~~-"+check_list.size());
+
 
         for (int i=0 ; i<check_list.size(); i++){
             Data data = new Data();
             data.setTask(tasks_list.get(i));
-
+            data.setID(id_list.get(i));
             if(check_list.get(i)==0){
                 data.setCheck(false);
             }else{

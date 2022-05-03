@@ -2,8 +2,15 @@ package org.techtown.today;
 
 public class Data {
 
+
+    private int ID;
     private String task;
     private Boolean check;
+
+
+    public int getID(){ return ID; }
+
+    public void setID(int ID){ this.ID = ID; }
 
     public String getTask() {
         return task;

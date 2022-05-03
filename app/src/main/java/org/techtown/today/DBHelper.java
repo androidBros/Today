@@ -19,6 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static int version = 1;
     String taskTable = "tasktable"; // 테이블 이름
 
+    List<Integer> id_list = new ArrayList<>();
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
     SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
@@ -44,11 +45,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
 
 
-        // Data 저장 - String startdate, String enddate, String day, String tasks, int exe
+    // Data 저장 - String startdate, String enddate, String day, String tasks, int exe
     public void insertTask(int startdate, int enddate, int day, String tasks, int exe) {
-        //SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
 
         Log.d("DBHelper", "--------------------DB insertTask()----------------------");
 
@@ -78,12 +83,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void getTaskDB(String date){
+        id_list.clear();
         check_list.clear();
         tasks_list.clear();
         int Intdate = Integer.parseInt(date);
 
 
-        //SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
 
         String sqlread = "SELECT * FROM taskTable WHERE startdate = "+Intdate+" AND "+"enddate = "+Intdate;
         Log.d("DBHelper", "-----------------"+sqlread);
@@ -92,7 +98,8 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = sqLiteDatabaseR.rawQuery(sqlread,null);
 
         while (cursor.moveToNext()){
-            Log.d("DBHelper", "-----------------"+cursor.getString(4) +"  /  "+cursor.getInt(5));
+            Log.d("DBHelper", "-----------------"+cursor.getString(0)+" / "+cursor.getString(4) +"  /  "+cursor.getInt(5));
+            id_list.add(cursor.getInt(0));
             tasks_list.add(cursor.getString(4));
             check_list.add(cursor.getInt(5));
 
@@ -100,8 +107,22 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+//    public void updateTable(int check ,int ID){
+//        if(taskTable != null){
+//            try{
+//
+//                String updateString = "UPDATE taskTable"
+//                        + "SET"
+//                        + "exe =" + check
+//                        + "WHERE _id="+ ID;
+//                sqLiteDatabaseW.execSQL(updateString);
+//
+//            }
+//            catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
-    }
+
 }

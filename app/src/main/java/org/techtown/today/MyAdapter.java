@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 // adapter에 들어갈 list 입니다.
@@ -54,6 +56,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         private TextView task_item;
 
 
+
         ItemViewHolder(View itemView) {
             super(itemView);
             task_checkbox = itemView.findViewById(R.id.task_checkBox);
@@ -67,5 +70,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
         }
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
+
+        holder.task_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    Log.d("MyAdapter", "checkbox log checked--------------------------"+holder+" / "+ position);
+                }
+                else{
+                    Log.d("MyAdapter", "checkbox log not checked--------------------------"+holder+" / "+ position);
+                }
+            }
+        });
+
+
+    }
+
 
 }
