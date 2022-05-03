@@ -8,11 +8,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     Calendar myCalendar = Calendar.getInstance();
+    String selected_date;
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, month);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
             updateLabel();
         }
     };
@@ -109,6 +115,11 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
       //  nojDate = myFormat.replace("-","");
         day_btn.setText(sdf.format(myCalendar.getTime()));
+        selected_date = sdf.format(myCalendar.getTime()).replace("-","");
+        Log.d("selected_date", "--------------------"+selected_date+"----------------------");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(day).attach(day).commit();
+        Log.d("detachattach", "--------------------실행됨----------------------");
     }
 
 

@@ -17,7 +17,7 @@ import java.util.List;
 public class day extends Fragment {
 
 
-    MyAdapter adapter = new MyAdapter();
+    //MyAdapter adapter = new MyAdapter();
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
     @Override
@@ -32,14 +32,17 @@ public class day extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
+        MyAdapter adapter = new MyAdapter();
         recyclerView.setAdapter(adapter);
 
 
         DBHelper dbHelper = new DBHelper(getActivity());
         MainActivity activity = (MainActivity) getActivity();
-        Log.d("제발 들어와라","--------day onCreateView 실행~~~~~~-"+activity.nojDate);
-        dbHelper.getTaskDB(activity.nojDate);
+        Log.d("제발 들어와라","--------day onCreateView 실행~~~~~~-"+activity.selected_date);
+        if (activity.selected_date == null){
+            activity.selected_date = activity.nojDate;
+        }
+        dbHelper.getTaskDB(activity.selected_date);
         this.check_list = dbHelper.check_list;
         this.tasks_list = dbHelper.tasks_list;
         Log.d("제발 들어와라","--------day onCreateView 실행~~~~~~-"+check_list.size());
