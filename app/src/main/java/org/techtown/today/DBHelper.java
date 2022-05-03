@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        Log.d("DB Create", "--------------------DB onCreate ----------------------");
+        Log.d("DBHelper", "--------------------DB onCreate ----------------------");
 
         sqLiteDatabase.execSQL("CREATE TABLE if not exists " + taskTable + "("
                 + "_id integer PRIMARY KEY autoincrement,"
@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "day int,"
                 + "task String,"
                 + "exe int)");
-        Log.d("DB Create", "--------------------DB 테이블 생성 ----------------------");
+
     }
 
 
@@ -49,11 +49,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertTask(int startdate, int enddate, int day, String tasks, int exe) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
-        Log.d("DB Create", "--------------------DB insertTask()----------------------");
+        Log.d("DBHelper", "--------------------DB insertTask()----------------------");
 
         try {
             if (taskTable == null) {
-                Log.d("DB Create", "--------------------DB insert faild----------------------");
+                Log.d("DBHelper", "--------------------DB insert faild----------------------");
                 return;
             }
 
@@ -62,14 +62,14 @@ public class DBHelper extends SQLiteOpenHelper {
                     + "values"
                     + "('" + startdate + "', '" + enddate + "', '" + day + "', '" + tasks + "', " + exe + ")";
 
-            Log.d("DB Create", sqlexe);
+            Log.d("DBHelper", sqlexe);
             sqLiteDatabase.execSQL(sqlexe);
 
-            Log.d("DB Create", "--------------------DB insert 성공----------------------");
+            Log.d("DBHelper", "--------------------DB insert 성공----------------------");
 
 
         } catch (Exception e) {
-            Log.d("DB Create", "--------------------DB Exception----------------------");
+            Log.d("DBHelper", "--------------------DB Exception----------------------");
             e.printStackTrace();
         }
     }
@@ -85,13 +85,13 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
         String sqlread = "SELECT * FROM taskTable WHERE startdate = "+Intdate+" AND "+"enddate = "+Intdate;
-        Log.d("DB Create", "-----------------"+sqlread);
+        Log.d("DBHelper", "-----------------"+sqlread);
 
 
         Cursor cursor = sqLiteDatabase.rawQuery(sqlread,null);
 
         while (cursor.moveToNext()){
-            Log.d("DB Create", "-----------------"+cursor.getString(4) +"  /  "+cursor.getInt(5));
+            Log.d("DBHelper", "-----------------"+cursor.getString(4) +"  /  "+cursor.getInt(5));
             tasks_list.add(cursor.getString(4));
             check_list.add(cursor.getInt(5));
 

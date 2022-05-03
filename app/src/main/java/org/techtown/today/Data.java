@@ -1,7 +1,5 @@
 package org.techtown.today;
 
-import android.util.Log;
-
 public class Data {
 
     private String task;
@@ -12,7 +10,6 @@ public class Data {
     }
 
     public void setTask(String task) {
-        Log.d("Data", "Data-------------"+task);
         this.task = task;
     }
 
@@ -21,7 +18,6 @@ public class Data {
     }
 
     public void setCheck(Boolean check) {
-        Log.d("Data", "Data-------------"+check);
         this.check = check;
     }
 

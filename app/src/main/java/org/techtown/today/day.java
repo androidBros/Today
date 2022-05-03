@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +22,7 @@ public class day extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("recycle_day","--------day onCreateView 실행~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!-----");
+        Log.d("day","--------day onCreateView 실행~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!-----");
         ViewGroup rootView= (ViewGroup) inflater.inflate(R.layout.fragment_day, container, false);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.task_recycle);
@@ -38,14 +37,14 @@ public class day extends Fragment {
 
         DBHelper dbHelper = new DBHelper(getActivity());
         MainActivity activity = (MainActivity) getActivity();
-        Log.d("제발 들어와라","--------day onCreateView 실행~~~~~~-"+activity.selected_date);
+        Log.d("day","--------day onCreateView 실행~~~~~~-"+activity.selected_date);
         if (activity.selected_date == null){
             activity.selected_date = activity.nojDate;
         }
         dbHelper.getTaskDB(activity.selected_date);
         this.check_list = dbHelper.check_list;
         this.tasks_list = dbHelper.tasks_list;
-        Log.d("제발 들어와라","--------day onCreateView 실행~~~~~~-"+check_list.size());
+        Log.d("day","--------day onCreateView 실행~~~~~~-"+check_list.size());
 
         for (int i=0 ; i<check_list.size(); i++){
             Data data = new Data();
@@ -59,7 +58,6 @@ public class day extends Fragment {
             adapter.addItem(data);
         }
         adapter.notifyDataSetChanged();
-
 
 
         return rootView;

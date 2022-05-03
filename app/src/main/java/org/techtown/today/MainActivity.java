@@ -8,15 +8,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button day_btn;
     Button next_btn;
 
-    day day; //그 날 일정 뜰 프래그먼트
+    day day = new day(); // 홈 화면 프레그먼트; //그 날 일정 뜰 프래그먼트
     add_schedule add_schedule; // 추가 눌렀을 때 프래그먼트
     add_short add_short; // 당일 일정 추가 화면
     add_long add_long; // 장기 일정 추가 화면
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Calendar myCalendar = Calendar.getInstance();
     String selected_date;
 
+
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -55,12 +54,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        day = new day(); // 홈 화면 프레그먼트
+        //day = new day(); // 홈 화면 프레그먼트
         onChangeFragment(0);
 
         add_schedule = new add_schedule(); // 추가 버튼 눌렀을 때
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
         next_btn = findViewById(R.id.next_btn);
 
         dbHelper = new DBHelper(this);
-        //SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 
-        Log.d("MainActivity DBHelper", "--------------------DB call----------------------");
+
+        Log.d("MainActivity", "DBHelper--------------------DB call----------------------");
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,10 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
         getTime();
         Log.d("MainActivity", "--------------------"+nojDate+"----------------------");
-        //dbHelper.getTask(nojDate);
 
     }
-
 
 
     private void updateLabel() {
@@ -116,10 +114,25 @@ public class MainActivity extends AppCompatActivity {
       //  nojDate = myFormat.replace("-","");
         day_btn.setText(sdf.format(myCalendar.getTime()));
         selected_date = sdf.format(myCalendar.getTime()).replace("-","");
-        Log.d("selected_date", "--------------------"+selected_date+"----------------------");
+        Log.d("MainActivity", "seleceted_date--------------------"+selected_date+"----------------------");
+
+
+        fragmentDetach(day);
+        fragmentAttach(day);
+    }
+
+
+    public void fragmentDetach(Fragment fragment){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(day).attach(day).commit();
-        Log.d("detachattach", "--------------------실행됨----------------------");
+        ft.detach(fragment).commit();
+    }
+
+
+    public void fragmentAttach(Fragment fragment){
+        Log.d("MainActivity", "seleceted_date--------------------selectDate() 실행됨----------------------");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.attach(fragment).commit();
+
     }
 
 
@@ -127,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     private void getTime(){
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
-        Log.d("MainActivity_mdata", "--------------------"+mDate+"----------------------");
+        Log.d("MainActivity", "mData--------------------"+mDate+"----------------------");
 
         day_btn.setText(mFormat.format(mDate));
 
