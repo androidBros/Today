@@ -21,7 +21,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
-
+    SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
+    SQLiteDatabase sqLiteDatabaseR = getReadableDatabase();
 
     public DBHelper(@Nullable Context context) {
 
@@ -47,7 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // Data 저장 - String startdate, String enddate, String day, String tasks, int exe
     public void insertTask(int startdate, int enddate, int day, String tasks, int exe) {
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        //SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         Log.d("DBHelper", "--------------------DB insertTask()----------------------");
 
@@ -63,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     + "('" + startdate + "', '" + enddate + "', '" + day + "', '" + tasks + "', " + exe + ")";
 
             Log.d("DBHelper", sqlexe);
-            sqLiteDatabase.execSQL(sqlexe);
+            sqLiteDatabaseW.execSQL(sqlexe);
 
             Log.d("DBHelper", "--------------------DB insert 성공----------------------");
 
@@ -82,13 +83,13 @@ public class DBHelper extends SQLiteOpenHelper {
         int Intdate = Integer.parseInt(date);
 
 
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        //SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
         String sqlread = "SELECT * FROM taskTable WHERE startdate = "+Intdate+" AND "+"enddate = "+Intdate;
         Log.d("DBHelper", "-----------------"+sqlread);
 
 
-        Cursor cursor = sqLiteDatabase.rawQuery(sqlread,null);
+        Cursor cursor = sqLiteDatabaseR.rawQuery(sqlread,null);
 
         while (cursor.moveToNext()){
             Log.d("DBHelper", "-----------------"+cursor.getString(4) +"  /  "+cursor.getInt(5));

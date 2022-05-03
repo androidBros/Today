@@ -20,8 +20,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
 
-    DBHelper dbHelper;
-
     Button today_btn;
     Button add_btn;
     Button back_btn;
@@ -73,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         day_btn = findViewById(R.id.day_btn);
         next_btn = findViewById(R.id.next_btn);
 
-        dbHelper = new DBHelper(this);
 
 
         Log.d("MainActivity", "DBHelper--------------------DB call----------------------");
@@ -98,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dbHelper.getTaskDB(nojDate);
+
             }
         });
 
