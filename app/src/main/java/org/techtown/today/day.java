@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +24,8 @@ public class day extends Fragment {
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
     static Activity mactivity;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,11 +51,13 @@ public class day extends Fragment {
             activity.selected_date = activity.nojDate;
         }
 
+
+
+
         dbHelper.getTaskDB(activity.selected_date);
         this.id_list = dbHelper.id_list;
         this.check_list = dbHelper.check_list;
         this.tasks_list = dbHelper.tasks_list;
-
 
         for (int i=0 ; i<check_list.size(); i++){
             Data data = new Data();
@@ -66,6 +69,7 @@ public class day extends Fragment {
             }else{
                 data.setCheck(true);
             }
+
             adapter.addItem(data);
         }
         adapter.notifyDataSetChanged();

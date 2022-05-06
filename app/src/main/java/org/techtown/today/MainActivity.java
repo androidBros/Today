@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private View header;
     CheckBox checkBox;
 
+    MyAdapter adapter = new MyAdapter();
+
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Log.d("MainActivity", "DBHelper--------------------DB call----------------------");
+        Log.d("MainActivity", "DBHelper--------------------!!!1!DB call----------------------");
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,9 +130,11 @@ public class MainActivity extends AppCompatActivity {
                     delete_btn.setVisibility(View.VISIBLE);
                     edit_btn.setText("편집취소");
                     delete_show = 1;
+                    fragmentDetach(day);
+                    adapter.checkboxvisble(1);
+                    fragmentAttach(day);
+
                     checkBox.setVisibility(View.INVISIBLE);
-
-
                     Log.d("MainActivity", "checkbox 지움--------");
 
 
@@ -140,7 +144,9 @@ public class MainActivity extends AppCompatActivity {
                     edit_btn.setText("편집");
                     delete_show = 0;
                     fragmentDetach(day);
+                    adapter.checkboxvisble(0);
                     fragmentAttach(day);
+
 
                     checkBox.setVisibility(View.VISIBLE);
                     Log.d("MainActivity", "checkbox 보임--------");

@@ -23,7 +23,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
     //ArrayList<Integer> delete_list = new ArrayList<>();
 
     int checked_id;
-
+    public static int tf=0;
 
     @NonNull
     @Override
@@ -41,6 +41,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 //        checked_id = listData.get(position).getID();
         day day = new day();
         Log.d("MyAdapter","ID------------------onbindviewholder 들어옴-------------------");
+
+        // check 박스 클릭 유무
         holder.task_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -73,6 +75,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
     }
 
+    public void checkboxvisble(int tf){
+        this.tf = tf;
+        Log.d("MyAdapter","-------------tf---------"+this.tf);
+
+    }
 
 
     // RecyclerView의 핵심인 ViewHolder 입니다.
@@ -83,6 +90,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         private TextView task_item;
         private int id_;
 
+
+
+
         private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
 
 
@@ -91,6 +101,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
             task_checkbox = itemView.findViewById(R.id.task_checkBox);
             task_item = itemView.findViewById(R.id.task_item);
 
+            // task 삭제
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -119,7 +130,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
             });
         }
 
+
+
+
         void onBind(Data data) {
+            Log.d("MyAdapter","-------------tftftftf---------"+tf);
+            if(tf == 1){
+
+                task_checkbox.setVisibility(View.INVISIBLE);
+            }
             task_checkbox.setChecked(data.getCheck());
             task_item.setText(data.getTask());
             id_ = data.getID();
