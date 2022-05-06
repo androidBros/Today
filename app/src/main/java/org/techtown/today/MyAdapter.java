@@ -1,6 +1,9 @@
 package org.techtown.today;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +71,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
     }
 
+
+
     // RecyclerView의 핵심인 ViewHolder 입니다.
     // 여기서 subView를 setting 해줍니다.
     class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -76,11 +81,48 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         private TextView task_item;
         private int id_;
 
+        private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
 
-        ItemViewHolder(View itemView) {
+
+        public ItemViewHolder(View itemView) {
             super(itemView);
             task_checkbox = itemView.findViewById(R.id.task_checkBox);
             task_item = itemView.findViewById(R.id.task_item);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    int position = getAdapterPosition();
+                    int delete = ((MainActivity)MainActivity.mContext).delete_show;
+                    if(delete == 1){
+                        Log.d("MyAdapter","delete_show 1-------------------------------------"+delete);
+                        if ( mSelectedItems.get(position, false)){
+                            mSelectedItems.put(position, false);
+                            view.setBackgroundColor(Color.WHITE);
+                        } else {
+                            mSelectedItems.put(position, true);
+                            view.setBackgroundColor(Color.LTGRAY);
+
+                        }
+                    }
+
+                    else if(delete == 0){
+
+                        //mSelectedItems.clear();
+//                        itemView.setBackgroundColor(Color.WHITE);
+                        Log.d("MyAdapter","delete_show 2-------------------------------------"+delete);
+                        for(int i=0; i < mSelectedItems.size() ; i++){
+                            mSelectedItems.delete(i);
+                        }
+                    }
+
+
+
+
+                }
+            });
         }
 
         void onBind(Data data) {
@@ -88,6 +130,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
             task_item.setText(data.getTask());
             id_ = data.getID();
             Log.d("MyAdapter","ID-------------------------------------"+data.getID());
+
         }
 
 

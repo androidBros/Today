@@ -1,6 +1,7 @@
 package org.techtown.today;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     Calendar myCalendar = Calendar.getInstance();
     String selected_date;
 
+    public static Context mContext;
+    public int delete_show;
+
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -59,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mContext = this;
 
         //day = new day(); // 홈 화면 프레그먼트
         onChangeFragment(0);
@@ -102,20 +108,30 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        MyAdapter myAdapter = new MyAdapter();
 
         edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 Log.d("MainActivity", "DELETE 상태--------"+delete_btn.getVisibility());
                 if (delete_btn.getVisibility() == View.INVISIBLE) {
                     delete_btn.setVisibility(View.VISIBLE);
                     edit_btn.setText("편집취소");
+                    delete_show = 1;
+
                 }else{
                     delete_btn.setVisibility(View.INVISIBLE);
                     edit_btn.setText("편집");
+                    delete_show = 0;
+                    fragmentDetach(day);
+                    fragmentAttach(day);
+
                 }
             }
         });
+
 
         getTime();
         Log.d("MainActivity", "--------------------"+nojDate+"----------------------");
