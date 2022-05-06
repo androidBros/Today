@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -108,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        MyAdapter myAdapter = new MyAdapter();
 
         edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +132,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        DBHelper dbHelper = new DBHelper(this);
+
+        delete_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyAdapter adapter = new MyAdapter();
+                Log.d("MainActivity", "DELETE 상태--------"+adapter.delete_list);
+                dbHelper.deleteTask(adapter.delete_list);
+
+            }
+        });
 
         getTime();
         Log.d("MainActivity", "--------------------"+nojDate+"----------------------");

@@ -134,7 +134,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
         }
-        //sqLiteDatabase.close();
+    }
+
+    public void deleteTask(ArrayList<Integer> delete_list){
+        for (int i = 0; i<delete_list.size(); i++){
+            String deletestring = "DELETE FROM taskTable"
+                    + " WHERE _id = "+ delete_list.get(i);
+            Log.d("DBHelper", "---------"+deletestring);
+            sqLiteDatabase.execSQL(deletestring);
+        }
     }
 
 
