@@ -108,15 +108,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
                         }
                     }
 
-                    else if(delete == 0){
-
-                        //mSelectedItems.clear();
-//                        itemView.setBackgroundColor(Color.WHITE);
-                        Log.d("MyAdapter","delete_show 2-------------------------------------"+delete);
-                        for(int i=0; i < mSelectedItems.size() ; i++){
-                            mSelectedItems.delete(i);
-                        }
-                    }
 
 
 
