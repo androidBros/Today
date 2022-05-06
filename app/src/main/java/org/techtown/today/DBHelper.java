@@ -22,8 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     List<Integer> id_list = new ArrayList<>();
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
-    SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
-    SQLiteDatabase sqLiteDatabaseR = getReadableDatabase();
+    SQLiteDatabase sqLiteDatabase;
 
 
     public DBHelper(@Nullable Context context) {
@@ -54,8 +53,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Data 저장 - String startdate, String enddate, String day, String tasks, int exe
     public void insertTask(int startdate, int enddate, int day, String tasks, int exe) {
-
-
+        //SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
+        Log.d("DBHelper", "--------sqliteDatabase writable 전-------" + sqLiteDatabase);
+        sqLiteDatabase = getWritableDatabase();
+        Log.d("DBHelper", "--------sqliteDatabase writable 후-------" + sqLiteDatabase);
         Log.d("DBHelper", "--------------------DB insertTask()----------------------");
 
         try {
@@ -70,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     + "('" + startdate + "', '" + enddate + "', '" + day + "', '" + tasks + "', " + exe + ")";
 
             Log.d("DBHelper", sqlexe);
-            sqLiteDatabaseW.execSQL(sqlexe);
+            sqLiteDatabase.execSQL(sqlexe);
 
             Log.d("DBHelper", "--------------------DB insert 성공----------------------");
 
@@ -79,12 +80,14 @@ public class DBHelper extends SQLiteOpenHelper {
             Log.d("DBHelper", "--------------------DB Exception----------------------");
             e.printStackTrace();
         }
+
     }
 
 
 
     public void getTaskDB(String date){
-
+        //SQLiteDatabase sqLiteDatabaseR = getReadableDatabase();
+        sqLiteDatabase = getReadableDatabase();
         id_list.clear();
         check_list.clear();
         tasks_list.clear();
@@ -97,7 +100,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("DBHelper", "-----------------"+sqlread);
 
 
-        Cursor cursor = sqLiteDatabaseR.rawQuery(sqlread,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(sqlread,null);
 
         while (cursor.moveToNext()){
             Log.d("DBHelper", "-----------------"+cursor.getString(0)+" / "+cursor.getString(4) +"  /  "+cursor.getInt(5));
@@ -110,22 +113,28 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void updateTable(int check ,int ID){
-
+        Log.d("DBHelper", "--------updateTable 들어옴---------" + check + " / " + ID);
+        Log.d("DBHelper", "--------sqliteDatabase-------" + sqLiteDatabase);
+        //SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
+        sqLiteDatabase = getWritableDatabase();
+        Log.d("DBHelper", "--------getWritableDatabase 실행됨---------");
 
         if(taskTable != null){
             try{
 
                 String updateString = "UPDATE taskTable"
-                        + "SET"
-                        + "exe =" + check
-                        + "WHERE _id="+ ID;
-                sqLiteDatabaseW.execSQL(updateString);
+                        + " SET"
+                        + " exe = " + check
+                        + " WHERE _id = "+ ID;
+                Log.d("DBHelper", "---------"+updateString);
+                sqLiteDatabase.execSQL(updateString);
 
             }
             catch (Exception e){
                 e.printStackTrace();
             }
         }
+        //sqLiteDatabase.close();
     }
 
 

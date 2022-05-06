@@ -1,12 +1,16 @@
 package org.techtown.today;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +24,7 @@ public class day extends Fragment {
     List<Integer> id_list = new ArrayList<>();
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
+    static Activity mactivity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class day extends Fragment {
 
 
         DBHelper dbHelper = new DBHelper(getActivity());
+        Log.d("day","-------------getActivity---------"+getActivity());
         MainActivity activity = (MainActivity) getActivity();
 
 
@@ -71,10 +77,26 @@ public class day extends Fragment {
 
 
     public void update(int check,int id){
+        Log.d("day", "--------update 안에서 mactivity -------------" + mactivity);
+        if (mactivity!= null) {
+            DBHelper dbHelper = new DBHelper(mactivity);
+            Log.d("day", "------getactivity 객체---------------" + mactivity);
+            Log.d("day", "--------check    id  -------------" + check + id);
+            dbHelper.updateTable(check, id);
+        }
+        else{
 
-        DBHelper dbHelper = new DBHelper(getActivity());
-        dbHelper.updateTable(check,id);
+            Log.d("day","------getactivity 객체---------------"+mactivity);
+        }
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
 
+        if(context instanceof Activity){
+            mactivity = (Activity)context;
+            Log.d("day", "--------mactivity---------" + mactivity);
+        }
+    }
 }

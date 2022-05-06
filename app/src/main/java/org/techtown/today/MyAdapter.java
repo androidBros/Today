@@ -35,10 +35,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         holder.onBind(listData.get(position));
         checked_id = listData.get(position).getID();
         day day = new day();
-
+        Log.d("MyAdapter","ID------------------onbindviewholder 들어옴-------------------");
         holder.task_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.d("MyAdapter","ID-----------------checklistener 들어옴--------------------");
                 if(holder.task_checkbox.isChecked()==true){
                     day.update(1,checked_id);
 
@@ -79,7 +80,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
             super(itemView);
             task_checkbox = itemView.findViewById(R.id.task_checkBox);
             task_item = itemView.findViewById(R.id.task_item);
-
         }
 
         void onBind(Data data) {
@@ -88,6 +88,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
             id_ = data.getID();
             Log.d("MyAdapter","ID-------------------------------------"+data.getID());
         }
+
+
+
     }
 
 
