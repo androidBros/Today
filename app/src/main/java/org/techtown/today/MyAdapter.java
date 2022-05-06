@@ -137,7 +137,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
             Log.d("MyAdapter","-------------tftftftf---------"+tf);
             if(tf == 1){
 
-                task_checkbox.setVisibility(View.INVISIBLE);
+//                task_checkbox.setVisibility(View.INVISIBLE);
+                task_checkbox.setEnabled(false);
             }
             task_checkbox.setChecked(data.getCheck());
             task_item.setText(data.getTask());
