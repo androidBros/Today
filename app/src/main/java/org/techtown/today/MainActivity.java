@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Button back_btn;
     Button day_btn;
     Button next_btn;
+    Button edit_btn;
+    Button delete_btn;
 
     day day = new day(); // 홈 화면 프레그먼트; //그 날 일정 뜰 프래그먼트
     add_schedule add_schedule; // 추가 눌렀을 때 프래그먼트
@@ -70,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         back_btn = findViewById(R.id.back_btn);
         day_btn = findViewById(R.id.day_btn);
         next_btn = findViewById(R.id.next_btn);
+        edit_btn = findViewById(R.id.edit_btn);
+        delete_btn = findViewById(R.id.delete_btn);
 
 
 
@@ -96,6 +100,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
+            }
+        });
+
+        edit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("MainActivity", "DELETE 상태--------"+delete_btn.getVisibility());
+                if (delete_btn.getVisibility() == View.INVISIBLE) {
+                    delete_btn.setVisibility(View.VISIBLE);
+                    edit_btn.setText("편집취소");
+                }else{
+                    delete_btn.setVisibility(View.INVISIBLE);
+                    edit_btn.setText("편집");
+                }
             }
         });
 
