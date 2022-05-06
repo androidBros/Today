@@ -20,7 +20,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 // adapter에 들어갈 list 입니다.
 
     ArrayList<Data> listData = new ArrayList<>();
-    ArrayList<Integer> delete_list = new ArrayList<>();
+    //ArrayList<Integer> delete_list = new ArrayList<>();
 
     int checked_id;
 
@@ -97,22 +97,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
                     int position = getAdapterPosition();
                     int delete = ((MainActivity)MainActivity.mContext).delete_show;
+
                     if(delete == 1){
                         if ( mSelectedItems.get(position, false)){
                             mSelectedItems.put(position, false);
                             view.setBackgroundColor(Color.WHITE);
-                            if(delete_list.contains(listData.get(position).getID())){
-                                delete_list.remove(Integer.valueOf(listData.get(position).getID()));
+                            if(((MainActivity)MainActivity.mContext).delete_list.contains(listData.get(position).getID())){
+                                ((MainActivity)MainActivity.mContext).delete_list.remove(Integer.valueOf(listData.get(position).getID()));
                             }
                         } else {
                             mSelectedItems.put(position, true);
                             view.setBackgroundColor(Color.LTGRAY);
                             Log.d("MyAdapter","delete_ids-------------------------------------"+ listData.get(position).getID());
-                            delete_list.add(listData.get(position).getID());
+                            ((MainActivity)MainActivity.mContext).delete_list.add(listData.get(position).getID());
                         }
 
                     }
-                    Log.d("MyAdapter","delete_ids-------------------------------------"+delete_list);
+                    Log.d("MyAdapter","delete_ids-------------------------------------"+((MainActivity)MainActivity.mContext).delete_list);
 
                 }
             });

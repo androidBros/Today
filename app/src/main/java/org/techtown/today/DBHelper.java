@@ -137,6 +137,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void deleteTask(ArrayList<Integer> delete_list){
+        sqLiteDatabase = getReadableDatabase();
         for (int i = 0; i<delete_list.size(); i++){
             String deletestring = "DELETE FROM taskTable"
                     + " WHERE _id = "+ delete_list.get(i);

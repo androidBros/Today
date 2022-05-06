@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public static Context mContext;
     public int delete_show;
 
+    public ArrayList<Integer> delete_list = new ArrayList<>();
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -137,9 +138,10 @@ public class MainActivity extends AppCompatActivity {
         delete_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyAdapter adapter = new MyAdapter();
-                Log.d("MainActivity", "DELETE 상태--------"+adapter.delete_list);
-                dbHelper.deleteTask(adapter.delete_list);
+                Log.d("MainActivity", "DELETE 상태--------"+delete_list);
+                dbHelper.deleteTask(delete_list);
+                fragmentDetach(day);
+                fragmentAttach(day);
 
             }
         });
