@@ -134,12 +134,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
 
         void onBind(Data data) {
-            Log.d("MyAdapter","-------------tftftftf---------"+tf);
-            if(tf == 1){
 
-//                task_checkbox.setVisibility(View.INVISIBLE);
+            // 편집 선택시 tf : 1 전달 -> tf가 1이면 체크박스 비활성화
+            if(tf == 1){
                 task_checkbox.setEnabled(false);
             }
+
             task_checkbox.setChecked(data.getCheck());
             task_item.setText(data.getTask());
             id_ = data.getID();
