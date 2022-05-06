@@ -70,6 +70,11 @@ public class day extends Fragment {
     }
 
 
+    public void update(int check,int id){
+
+        DBHelper dbHelper = new DBHelper(getActivity());
+        dbHelper.updateTable(check,id);
+    }
 
 
 }

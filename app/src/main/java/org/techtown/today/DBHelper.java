@@ -84,6 +84,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void getTaskDB(String date){
+
         id_list.clear();
         check_list.clear();
         tasks_list.clear();
@@ -109,6 +110,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void updateTable(int check ,int ID){
+
+
         if(taskTable != null){
             try{
 
