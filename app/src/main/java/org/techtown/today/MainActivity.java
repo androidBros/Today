@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
     public int delete_show;
 
     public ArrayList<Integer> delete_list = new ArrayList<>();
+    DBHelper dbHelper = new DBHelper(this);
+
+    private View header;
+    CheckBox checkBox;
 
     DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -114,13 +119,21 @@ public class MainActivity extends AppCompatActivity {
         edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                header = getLayoutInflater().inflate(R.layout.task_item_view, null, false);
+                checkBox = (CheckBox) header.findViewById(R.id.task_checkBox);
 
-
-                Log.d("MainActivity", "DELETE 상태--------"+delete_btn.getVisibility());
+                Log.d("MainActivity", "checkbox--------"+checkBox);
                 if (delete_btn.getVisibility() == View.INVISIBLE) {
+
                     delete_btn.setVisibility(View.VISIBLE);
                     edit_btn.setText("편집취소");
                     delete_show = 1;
+                    checkBox.setVisibility(View.INVISIBLE);
+
+
+                    Log.d("MainActivity", "checkbox 지움--------");
+
+
 
                 }else{
                     delete_btn.setVisibility(View.INVISIBLE);
@@ -129,11 +142,14 @@ public class MainActivity extends AppCompatActivity {
                     fragmentDetach(day);
                     fragmentAttach(day);
 
+                    checkBox.setVisibility(View.VISIBLE);
+                    Log.d("MainActivity", "checkbox 보임--------");
+
                 }
             }
         });
 
-        DBHelper dbHelper = new DBHelper(this);
+
 
         delete_btn.setOnClickListener(new View.OnClickListener() {
             @Override
