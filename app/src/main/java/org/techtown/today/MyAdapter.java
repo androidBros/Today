@@ -33,13 +33,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
         holder.onBind(listData.get(position));
-        checked_id = listData.get(position).getID();
+//        checked_id = listData.get(position).getID();
         day day = new day();
         Log.d("MyAdapter","ID------------------onbindviewholder 들어옴-------------------");
         holder.task_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Log.d("MyAdapter","ID-----------------checklistener 들어옴--------------------");
+                checked_id = listData.get(position).getID();
+                Log.d("MyAdapter","ID-----------------checklistener 들어옴--------------------"+checked_id);
                 if(holder.task_checkbox.isChecked()==true){
                     day.update(1,checked_id);
 
