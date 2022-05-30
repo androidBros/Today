@@ -2,15 +2,18 @@ package org.techtown.today;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -26,6 +29,17 @@ public class add_long extends Fragment {
     Button thu_btn;
     Button fri_btn;
     Button sat_btn;
+    TextView longtasks;
+
+    Button longcancel_btn;
+    Button longadd_btn;
+    String days_str = "";
+    Integer days_int;
+
+    ArrayList<Integer> days = new ArrayList<>();
+    Integer startdate;
+    Integer enddate;
+    String getlongtasks;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +55,9 @@ public class add_long extends Fragment {
         thu_btn = rootView.findViewById(R.id.thu_btn);
         fri_btn = rootView.findViewById(R.id.fri_btn);
         sat_btn = rootView.findViewById(R.id.sat_btn);
+        longadd_btn = rootView.findViewById(R.id.longadd_btn);
+        longcancel_btn = rootView.findViewById(R.id.longcancel_btn);
+        longtasks = rootView.findViewById(R.id.longtasks);
 
 
         myCalendar = Calendar.getInstance();
@@ -84,9 +101,13 @@ public class add_long extends Fragment {
             public void onClick(View view) {
                 if(sun_btn.isSelected() == true){
                     sun_btn.setSelected(false);
+                    days.remove(Integer.valueOf(1));
+                    Log.d("addlong", "dayslist--------------------"+days+"----------------------");
                 }
                 else{
                     sun_btn.setSelected(true);
+                    days.add(1);
+                    Log.d("addlong", "dayslist--------------------"+days+"----------------------");
                 }
 
             }
@@ -97,9 +118,11 @@ public class add_long extends Fragment {
             public void onClick(View view) {
                 if(mon_btn.isSelected() == true){
                     mon_btn.setSelected(false);
+                    days.remove(Integer.valueOf(2));
                 }
                 else{
                     mon_btn.setSelected(true);
+                    days.add(2);
                 }
 
             }
@@ -110,9 +133,11 @@ public class add_long extends Fragment {
             public void onClick(View view) {
                 if(tue_btn.isSelected() == true){
                     tue_btn.setSelected(false);
+                    days.remove(Integer.valueOf(3));
                 }
                 else{
                     tue_btn.setSelected(true);
+                    days.add(3);
                 }
 
             }
@@ -123,9 +148,11 @@ public class add_long extends Fragment {
             public void onClick(View view) {
                 if(wed_btn.isSelected() == true){
                     wed_btn.setSelected(false);
+                    days.remove(Integer.valueOf(4));
                 }
                 else{
                     wed_btn.setSelected(true);
+                    days.add(4);
                 }
             }
         });
@@ -135,9 +162,11 @@ public class add_long extends Fragment {
             public void onClick(View view) {
                 if(thu_btn.isSelected() == true){
                     thu_btn.setSelected(false);
+                    days.remove(Integer.valueOf(5));
                 }
                 else{
                     thu_btn.setSelected(true);
+                    days.add(5);
                 }
             }
         });
@@ -147,9 +176,11 @@ public class add_long extends Fragment {
             public void onClick(View view) {
                 if(fri_btn.isSelected() == true){
                     fri_btn.setSelected(false);
+                    days.remove(Integer.valueOf(6));
                 }
                 else{
                     fri_btn.setSelected(true);
+                    days.add(6);
                 }
             }
         });
@@ -159,13 +190,28 @@ public class add_long extends Fragment {
             public void onClick(View view) {
                 if(sat_btn.isSelected() == true){
                     sat_btn.setSelected(false);
+                    days.remove(Integer.valueOf(7));
                 }
                 else{
                     sat_btn.setSelected(true);
+                    days.add(7);
                 }
             }
         });
 
+        longadd_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                for (int i=0; i <days.size(); i++){
+                    days_str += Integer.toString(days.get(i));
+                }
+                days_int = Integer.parseInt(days_str);
+                getlongtasks = longtasks.getText().toString();
+                Log.d("addlong", "dayslist---------------"+days_str+"---"+startdate+"----"+enddate+"----"+getlongtasks+"-----------");
+
+            }
+        });
 
         return rootView;
     }
@@ -175,8 +221,10 @@ public class add_long extends Fragment {
         //  nojDate = myFormat.replace("-","");
         if (str == "start") {
             startdate_btn.setText(sdf.format(myCalendar.getTime()));
+            startdate = Integer.parseInt(sdf.format(myCalendar.getTime()).replace("-",""));
         }else{
             enddate_btn.setText(sdf.format(myCalendar.getTime()));
+            enddate = Integer.parseInt(sdf.format(myCalendar.getTime()).replace("-",""));
         }
     }
 }
