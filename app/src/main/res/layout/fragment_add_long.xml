@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="시작 날짜" />
+            android:text="--/--/--" />
 
         <TextView
             android:id="@+id/textView"
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="종료 날짜" />
+            android:text="--/--/--" />
 
     </LinearLayout>
 
@@ -131,8 +131,8 @@
         android:layout_height="0dp"
         android:layout_weight="8"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="할 일을 추가해 주세요."
+        android:inputType="textPersonName" />
 
     <LinearLayout
         android:layout_width="match_parent"
