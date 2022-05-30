@@ -59,6 +59,7 @@ public class add_long extends Fragment {
         longcancel_btn = rootView.findViewById(R.id.longcancel_btn);
         longtasks = rootView.findViewById(R.id.longtasks);
 
+        DBHelper dbHelper = new DBHelper(getActivity());
 
         myCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener startDatePicker = new DatePickerDialog.OnDateSetListener() {
@@ -210,6 +211,7 @@ public class add_long extends Fragment {
                 getlongtasks = longtasks.getText().toString();
                 Log.d("addlong", "dayslist---------------"+days_str+"---"+startdate+"----"+enddate+"----"+getlongtasks+"-----------");
 
+                dbHelper.insertTask(startdate,enddate,days_int,getlongtasks,0);
             }
         });
 
