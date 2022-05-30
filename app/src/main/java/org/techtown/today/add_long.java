@@ -212,6 +212,8 @@ public class add_long extends Fragment {
                 Log.d("addlong", "dayslist---------------"+days_str+"---"+startdate+"----"+enddate+"----"+getlongtasks+"-----------");
 
                 dbHelper.insertTask(startdate,enddate,days_int,getlongtasks,0);
+
+                longtasks.setText("");
             }
         });
 

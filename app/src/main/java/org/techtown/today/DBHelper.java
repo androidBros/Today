@@ -96,7 +96,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-        String sqlread = "SELECT * FROM taskTable WHERE startdate = "+Intdate+" AND "+"enddate = "+Intdate;
+       // String sqlread = "SELECT * FROM taskTable WHERE startdate = "+Intdate+" AND "+"enddate = "+Intdate;
+        String sqlread = "SELECT * FROM taskTable WHERE startdate <= "+Intdate+" AND "+"enddate >= "+Intdate;
         Log.d("DBHelper", "-----------------"+sqlread);
 
 
