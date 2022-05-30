@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -113,8 +114,59 @@ public class MainActivity extends AppCompatActivity {
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar c = Calendar.getInstance();
+
+                try {
+                    Date sd = sdf1.parse(selected_date);
+                    c.setTime(sd);
+                    c.add(Calendar.DATE, 1);
+                    selected_date = sdf1.format(c.getTime());
+
+                    String selected_date2 = sdf2.format(c.getTime());
+                    day_btn.setText(selected_date2);
 
 
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
+                fragmentDetach(day);
+                fragmentAttach(day);
+
+
+            }
+        });
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar c = Calendar.getInstance();
+
+                try {
+                    Date sd = sdf1.parse(selected_date);
+                    c.setTime(sd);
+                    c.add(Calendar.DATE, -1);
+                    selected_date = sdf1.format(c.getTime());
+
+                    String selected_date2 = sdf2.format(c.getTime());
+                    day_btn.setText(selected_date2);
+
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                fragmentDetach(day);
+                fragmentAttach(day);
             }
         });
 
@@ -213,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         nojDate = dateFormat.format(mDate);
-        nojDate = nojDate.replace("-","");
+        selected_date = nojDate.replace("-","");
 
     }
 

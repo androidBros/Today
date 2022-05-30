@@ -38,16 +38,16 @@ public class add_short extends Fragment {
 
         MainActivity activity = (MainActivity) getActivity();
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = transFormat.format(activity.mDate);
-        date = date.replace("-","");
-
-
+        Log.d("addshort","date------------------"+activity.selected_date+"-------------------");
+        //date = transFormat.format(activity.mDate);
+        //date = date.replace("-","");
+        date = activity.selected_date;
 
 
         insert_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.d("addshort","date------------------"+activity.mDate+"-------------------");
                 tasks = insertTask.getText().toString();
                 Log.d("add_short",tasks + " / "+ date);
 

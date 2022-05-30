@@ -47,10 +47,6 @@ public class day extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
 
 
-        if (activity.selected_date == null){
-            activity.selected_date = activity.nojDate;
-        }
-
 
 
 
