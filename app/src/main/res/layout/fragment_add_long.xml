@@ -67,54 +67,61 @@
         android:layout_weight="1"
         android:orientation="horizontal" >
 
-        <Button
+        <android.widget.Button
             android:id="@+id/sun_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="일" />
+            android:text="일"
+            android:backgroundTint="@drawable/button_days"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/mon_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="월" />
+            android:text="월"
+            android:backgroundTint="@drawable/button_days"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/tue_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="화" />
+            android:text="화"
+            android:backgroundTint="@drawable/button_days"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/wed_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="수" />
+            android:text="수"
+            android:backgroundTint="@drawable/button_days"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/thu_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="목" />
+            android:text="목"
+            android:backgroundTint="@drawable/button_days"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/fri_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="금" />
+            android:text="금"
+            android:backgroundTint="@drawable/button_days"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/sat_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="토" />
+            android:text="토"
+            android:backgroundTint="@drawable/button_days"/>
 
     </LinearLayout>
 
