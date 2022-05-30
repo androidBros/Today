@@ -22,27 +22,41 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="시작" />
+
+        <Button
+            android:id="@+id/startdate_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:text="시작 날짜" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:text="~"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="종료" />
+
+        <Button
+            android:id="@+id/enddate_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:text="종료 날짜" />
 
     </LinearLayout>
@@ -53,56 +67,50 @@
         android:layout_weight="1"
         android:orientation="horizontal" >
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7" />
-
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/sun_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="일" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/mon_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="월" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/tue_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="화" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/wed_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="수" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/thu_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="목" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/fri_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="금" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/sat_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -126,14 +134,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/longcancel_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="취소" />
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/longadd_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

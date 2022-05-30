@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, month);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
             updateLabel();
         }
     };
@@ -299,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void showDatePicker(View view) {
 
-
-
+    }
 }
