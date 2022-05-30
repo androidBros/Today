@@ -223,6 +223,15 @@ public class MainActivity extends AppCompatActivity {
         getTime();
         Log.d("MainActivity", "--------------------"+nojDate+"----------------------");
 
+        today_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getTime();
+                fragmentDetach(day);
+                fragmentAttach(day);
+
+            }
+        });
     }
 
 
