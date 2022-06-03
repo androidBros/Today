@@ -112,13 +112,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
                     if(delete == 1){
                         if ( mSelectedItems.get(position, false)){
                             mSelectedItems.put(position, false);
-                            view.setBackgroundColor(Color.WHITE);
+                            view.setBackgroundResource(R.drawable.task);
+                            //view.setBackgroundColor(Color.WHITE);
                             if(((MainActivity)MainActivity.mContext).delete_list.contains(listData.get(position).getID())){
                                 ((MainActivity)MainActivity.mContext).delete_list.remove(Integer.valueOf(listData.get(position).getID()));
                             }
                         } else {
                             mSelectedItems.put(position, true);
-                            view.setBackgroundColor(Color.LTGRAY);
+                            view.setBackgroundResource(R.drawable.task2);
+                            //view.setBackgroundColor(Color.LTGRAY);
                             Log.d("MyAdapter","delete_ids-------------------------------------"+ listData.get(position).getID());
                             ((MainActivity)MainActivity.mContext).delete_list.add(listData.get(position).getID());
                         }
