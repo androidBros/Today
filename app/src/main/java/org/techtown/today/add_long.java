@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -39,9 +40,9 @@ public class add_long extends Fragment {
     Integer days_int;
 
     ArrayList<Integer> days = new ArrayList<>();
-    Integer startdate;
-    Integer enddate;
-    String getlongtasks;
+    Integer startdate = 0;
+    Integer enddate = 0;
+    String getlongtasks ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -224,23 +225,32 @@ public class add_long extends Fragment {
 
                     btw = endd.getTime() - startd.getTime();
                     btw = btw / (24*60*60*1000);
-                    Log.d("addlong", "start / end ---------------"+btw+"-----------");
+                    Log.d("addlong", "start / end ---------------"+startdate+"/"+enddate+"/"+getlongtasks+"/"+days+"-----------");
 
-                    c.setTime(startd);
-                    for(int i=0; i<(btw+1); i++){
-                        insertdate  = Integer.parseInt(sdf.format(c.getTime()));
-                        Log.d("addlong", "start / end ---------------"+insertdate+"-----------");
-                        dayNum = c.get(Calendar.DAY_OF_WEEK);  // 해당되는 날짜 정수
-                        if (days.contains(dayNum)){
+                    //---------------------------------------------------------------
+                    if (getlongtasks.isEmpty() || days.isEmpty() || btw < 0 ){
 
-                            dbHelper.insertTask(insertdate,insertdate,dayNum,getlongtasks,0);
-                        }
-
-                        c.add(Calendar.DATE, 1);
+                        Toast.makeText(getContext(),"정보를 정확히 기입해주세요", Toast.LENGTH_LONG).show();
                     }
+                    //--------------------------------------------------------------
+                    else {
+                        c.setTime(startd);
+                        for (int i = 0; i < (btw + 1); i++) {
+                            insertdate = Integer.parseInt(sdf.format(c.getTime()));
+                            Log.d("addlong", "start / end ---------------" + insertdate + "-----------");
+                            dayNum = c.get(Calendar.DAY_OF_WEEK);  // 해당되는 날짜 정수
+                            if (days.contains(dayNum)) {
 
+                                dbHelper.insertTask(insertdate, insertdate, dayNum, getlongtasks, 0);
+                            }
+
+                            c.add(Calendar.DATE, 1);
+                        }
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
+                    Log.d("addlong", "start / end ---------------예외 상황-----------");
+                    Toast.makeText(getContext(),"정보를 정확히 기입해주세요", Toast.LENGTH_LONG).show();
                 }
 
 
