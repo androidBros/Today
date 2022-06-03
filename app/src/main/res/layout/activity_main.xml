@@ -10,22 +10,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="1"
+        android:background="#BEC2C3"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/today_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="오늘(홈)" />
+            android:background="@android:color/transparent"
+            android:src="@drawable/home"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            app:srcCompat="@drawable/logo" />
+
+        <ImageButton
             android:id="@+id/search_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="검색" />
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:background="@android:color/transparent"
+            android:src="@drawable/search"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -33,28 +45,35 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8"
+        android:background="#BEC2C3"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="하루 전" />
+            android:background="@android:color/transparent"
+            android:src="@drawable/back"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/day_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="날짜" />
+            android:background="@android:color/transparent"
+            android:text="날짜"
+            android:textColor="#000000" />
 
-        <Button
+        <ImageButton
             android:id="@+id/next_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="하루 뒤" />
+            android:background="@android:color/transparent"
+            android:src="@drawable/next"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -62,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8"
+        android:background="#BEC2C3"
         android:orientation="horizontal">
 
         <Button
@@ -69,28 +89,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="편집" />
+            android:background="@android:color/transparent"
+            android:text="편집"
+            android:textColor="#000000" />
 
         <Button
             android:id="@+id/add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="추가" />
+            android:background="@android:color/transparent"
+            android:text="추가"
+            android:textColor="#000000" />
     </LinearLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="15dp"
-        android:layout_weight="8" />
+        android:layout_weight="8"
+        android:background="#D9D9D9"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/delete_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:text="삭제"
-        android:visibility="invisible"/>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="15dp"
+            android:layout_weight="8" />
+
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:background="#BEC2C3"
+            android:text="삭제"
+            android:textColor="#000000"
+            android:visibility="invisible" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -24,19 +25,20 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button today_btn;
+    ImageButton today_btn;
     Button add_btn;
-    Button back_btn;
+    ImageButton back_btn;
     Button day_btn;
-    Button next_btn;
+    ImageButton next_btn;
     Button edit_btn;
     Button delete_btn;
-    Button search_btn;
+    ImageButton search_btn;
 
     day day = new day(); // 홈 화면 프레그먼트; //그 날 일정 뜰 프래그먼트
     add_schedule add_schedule; // 추가 눌렀을 때 프래그먼트
     add_short add_short; // 당일 일정 추가 화면
     add_long add_long; // 장기 일정 추가 화면
+    search search;
 
 
     long mNow;
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         add_schedule = new add_schedule(); // 추가 버튼 눌렀을 때
         add_short = new add_short();
         add_long = new add_long();
+        search = new search();
 
         today_btn = findViewById(R.id.today_btn);
         add_btn = findViewById(R.id.add_btn);
@@ -257,6 +260,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onChangeFragment(4);
+            }
+        });
     }
 
 
@@ -329,6 +339,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, add_short).addToBackStack(null).commit();
         }else if (index == 3){ // 장기 일정 추가 화면
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, add_long).addToBackStack(null).commit();
+        }else if (index == 4){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, search).addToBackStack(null).commit();
         }
     }
 
