@@ -22,6 +22,8 @@ public class DBHelper extends SQLiteOpenHelper {
     List<Integer> id_list = new ArrayList<>();
     List<Integer> check_list = new ArrayList<>();
     List<String> tasks_list = new ArrayList<>();
+    List<Integer> search_date_list = new ArrayList<>();
+    List<String> search_tasks_list = new ArrayList<>();
     SQLiteDatabase sqLiteDatabase;
 
 
@@ -144,6 +146,21 @@ public class DBHelper extends SQLiteOpenHelper {
                     + " WHERE _id = "+ delete_list.get(i);
             Log.d("DBHelper", "---------"+deletestring);
             sqLiteDatabase.execSQL(deletestring);
+        }
+    }
+
+
+    public void searchTask(String query){
+        sqLiteDatabase = getReadableDatabase();
+        String searchsql = "SELECT startdate,task FROM taskTable WHERE task LIKE \'%"+query+"%\'";
+        Log.d("DBHelper", "-----------------"+searchsql);
+        Cursor cursor = sqLiteDatabase.rawQuery(searchsql,null);
+
+        while (cursor.moveToNext()){
+            Log.d("DBHelper", "-----------------"+cursor.getInt(0)+" / "+cursor.getString(1));
+            search_date_list.add(cursor.getInt(0));
+            search_tasks_list.add(cursor.getString(1));
+
         }
     }
 

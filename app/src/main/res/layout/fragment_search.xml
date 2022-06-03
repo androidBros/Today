@@ -7,11 +7,12 @@
     tools:context=".search">
 
     <SearchView
+        android:id="@+id/searchview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/task_recycle"
+        android:id="@+id/search_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical" />

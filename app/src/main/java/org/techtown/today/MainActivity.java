@@ -264,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("MainActivity", "seleceted_date-------------돋보기 클릭---------------------");
                 onChangeFragment(4);
             }
         });
