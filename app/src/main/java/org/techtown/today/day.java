@@ -29,6 +29,7 @@ public class day extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         Log.d("day","----------------day onCreateView 실행---------------");
         ViewGroup rootView= (ViewGroup) inflater.inflate(R.layout.fragment_day, container, false);
 

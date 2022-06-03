@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button next_btn;
     Button edit_btn;
     Button delete_btn;
+    Button search_btn;
 
     day day = new day(); // 홈 화면 프레그먼트; //그 날 일정 뜰 프래그먼트
     add_schedule add_schedule; // 추가 눌렀을 때 프래그먼트
@@ -89,14 +90,20 @@ public class MainActivity extends AppCompatActivity {
         next_btn = findViewById(R.id.next_btn);
         edit_btn = findViewById(R.id.edit_btn);
         delete_btn = findViewById(R.id.delete_btn);
-
+        search_btn = findViewById(R.id.search_btn);
 
 
         Log.d("MainActivity", "DBHelper--------------------!!!1!DB call----------------------");
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
+                edit_btn.setEnabled(false);
+                back_btn.setEnabled(false);
+                day_btn.setEnabled(false);
+                next_btn.setEnabled(false);
+                search_btn.setEnabled(false);
                 onChangeFragment(1);
             }
         });
@@ -175,8 +182,15 @@ public class MainActivity extends AppCompatActivity {
                 header = getLayoutInflater().inflate(R.layout.task_item_view, null, false);
                 checkBox = (CheckBox) header.findViewById(R.id.task_checkBox);
 
+
                 Log.d("MainActivity", "checkbox--------"+checkBox);
                 if (delete_btn.getVisibility() == View.INVISIBLE) {
+
+                    add_btn.setEnabled(false);
+                    back_btn.setEnabled(false);
+                    day_btn.setEnabled(false);
+                    next_btn.setEnabled(false);
+                    search_btn.setEnabled(false);
 
                     delete_btn.setVisibility(View.VISIBLE);
                     edit_btn.setText("편집취소");
@@ -198,6 +212,11 @@ public class MainActivity extends AppCompatActivity {
                     adapter.checkboxvisble(0);
                     fragmentAttach(day);
 
+                    add_btn.setEnabled(true);
+                    back_btn.setEnabled(true);
+                    day_btn.setEnabled(true);
+                    next_btn.setEnabled(true);
+                    search_btn.setEnabled(true);
 
                     checkBox.setVisibility(View.VISIBLE);
                     Log.d("MainActivity", "checkbox 보임--------");
@@ -225,6 +244,12 @@ public class MainActivity extends AppCompatActivity {
         today_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                edit_btn.setEnabled(true);
+                add_btn.setEnabled(true);
+                back_btn.setEnabled(true);
+                day_btn.setEnabled(true);
+                next_btn.setEnabled(true);
+                search_btn.setEnabled(true);
                 getTime();
                 onChangeFragment(0);
                 fragmentDetach(day);
@@ -279,6 +304,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBackPressed(){
+        if(getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView) == add_schedule){
+            edit_btn.setEnabled(true);
+            add_btn.setEnabled(true);
+            back_btn.setEnabled(true);
+            day_btn.setEnabled(true);
+            next_btn.setEnabled(true);
+            search_btn.setEnabled(true);
+        }
         if(getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView) == day){
             finish();
         }else{
