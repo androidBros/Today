@@ -1,5 +1,7 @@
 package org.techtown.today;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +21,8 @@ import java.util.List;
 public class search extends Fragment {
     SearchView searchView;
     TextView search_time;
+
+    static MainActivity mactivity;
 
     List<Integer> search_date_list = new ArrayList<>();
     List<String> search_tasks_list = new ArrayList<>();
@@ -32,10 +37,10 @@ public class search extends Fragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.search_recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        search_Adapter sa = new search_Adapter();
-        recyclerView.setAdapter(sa);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//
+//        search_Adapter sa = new search_Adapter();
+//        recyclerView.setAdapter(sa);
 
         DBHelper dbHelper = new DBHelper(getActivity());
 
@@ -45,7 +50,9 @@ public class search extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+                recyclerView.setLayoutManager(linearLayoutManager);
+                search_Adapter sa = new search_Adapter();
+                recyclerView.setAdapter(sa);
                 dbHelper.searchTask(query);
                 search_date_list = dbHelper.search_date_list;
                 search_tasks_list = dbHelper.search_tasks_list;
@@ -73,5 +80,20 @@ public class search extends Fragment {
 
 
         return rootView;
+    }
+
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if(context instanceof Activity){
+            mactivity = (MainActivity) getActivity();
+            Log.d("day", "--------mactivity---------" + mactivity);
+        }
+    }
+    public void go_selected_date(String date, String nojdate){
+        mactivity.selected_date = nojdate;
+        mactivity.onChangeFragment(0);
+        mactivity.day_btn.setText(date);
+        Log.d("day", "--------mactivity---------" + mactivity.selected_date);
     }
 }

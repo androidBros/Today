@@ -155,7 +155,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String searchsql = "SELECT startdate,task FROM taskTable WHERE task LIKE \'%"+query+"%\'";
         Log.d("DBHelper", "-----------------"+searchsql);
         Cursor cursor = sqLiteDatabase.rawQuery(searchsql,null);
-
+        search_date_list.clear();
+        search_tasks_list.clear();
         while (cursor.moveToNext()){
             Log.d("DBHelper", "-----------------"+cursor.getInt(0)+" / "+cursor.getString(1));
             search_date_list.add(cursor.getInt(0));

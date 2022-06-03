@@ -54,6 +54,7 @@ public class search_Adapter extends RecyclerView.Adapter<search_Adapter.ItemView
 
         private TextView searchDate;
         private TextView searchTasks;
+        search search = new search();
 
         public ItemViewHolder(View itemView) {
             super(itemView);
@@ -63,8 +64,9 @@ public class search_Adapter extends RecyclerView.Adapter<search_Adapter.ItemView
                 @Override
                 public void onClick(View view) {
                     String date = (String) searchDate.getText();
-                    date = date.replaceAll("-","");
-                    int search_selected_date = Integer.parseInt(date);
+                    String nojdate = date.replaceAll("-","");
+                    //int search_selected_date = Integer.parseInt(date);
+                    search.go_selected_date(date, nojdate);
                 }
             });
         }

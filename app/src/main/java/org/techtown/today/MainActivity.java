@@ -266,6 +266,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("MainActivity", "seleceted_date-------------돋보기 클릭---------------------");
                 onChangeFragment(4);
+                add_btn.setEnabled(false);
+                back_btn.setEnabled(false);
+                day_btn.setEnabled(false);
+                next_btn.setEnabled(false);
+                edit_btn.setEnabled(false);
             }
         });
     }
