@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class add_long extends Fragment {
@@ -204,17 +206,53 @@ public class add_long extends Fragment {
         longadd_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                for (int i=0; i <days.size(); i++){
-                    days_str += Integer.toString(days.get(i));
-                }
-                days_int = Integer.parseInt(days_str);
+                Date startd;
+                Date endd;
+                long btw;
+                int dayNum;
+                int insertdate;
+                String start_d = Integer.toString(startdate);
+                String end_d = Integer.toString(enddate);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                Calendar c = Calendar.getInstance();
                 getlongtasks = longtasks.getText().toString();
 
+                try {
+                    startd = sdf.parse(start_d);
+                    endd = sdf.parse(end_d);
+                    Log.d("addlong", "start / end ---------------"+startd+endd+"-----------");
 
-                Log.d("addlong", "dayslist---------------"+days_str+"---"+startdate+"----"+enddate+"----"+getlongtasks+"-----------");
+                    btw = endd.getTime() - startd.getTime();
+                    btw = btw / (24*60*60*1000);
+                    Log.d("addlong", "start / end ---------------"+btw+"-----------");
 
-                dbHelper.insertTask(startdate,enddate,days_int,getlongtasks,0);
+                    c.setTime(startd);
+                    for(int i=0; i<(btw+1); i++){
+                        insertdate  = Integer.parseInt(sdf.format(c.getTime()));
+                        Log.d("addlong", "start / end ---------------"+insertdate+"-----------");
+                        dayNum = c.get(Calendar.DAY_OF_WEEK);  // 해당되는 날짜 정수
+                        if (days.contains(dayNum)){
+
+                            dbHelper.insertTask(insertdate,insertdate,dayNum,getlongtasks,0);
+                        }
+
+                        c.add(Calendar.DATE, 1);
+                    }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+
+
+
+
+                //Log.d("addlong", "dayslist---------------"+days_str+"---"+startdate+"----"+enddate+"----"+getlongtasks+"-----------");
+
+                //dbHelper.insertTask(startdate,enddate,days_int,getlongtasks,0);
 
                 longtasks.setText("");
                 startdate_btn.setText("--/--/--");

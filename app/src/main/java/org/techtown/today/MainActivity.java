@@ -226,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getTime();
+                onChangeFragment(0);
                 fragmentDetach(day);
                 fragmentAttach(day);
 
