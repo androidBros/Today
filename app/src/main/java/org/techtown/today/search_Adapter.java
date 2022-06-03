@@ -9,7 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class search_Adapter extends RecyclerView.Adapter<search_Adapter.ItemViewHolder> {
@@ -57,7 +59,14 @@ public class search_Adapter extends RecyclerView.Adapter<search_Adapter.ItemView
             super(itemView);
             searchDate = itemView.findViewById(R.id.search_time);
             searchTasks = itemView.findViewById(R.id.search_task);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String date = (String) searchDate.getText();
+                    date = date.replaceAll("-","");
+                    int search_selected_date = Integer.parseInt(date);
+                }
+            });
         }
         void onBind(Data data){
             Log.d("MyAdapter","onBind-------------------------------------"+data.getDate()+" / "+data.getSearchTasks());
