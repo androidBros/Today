@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 day_btn.setEnabled(false);
                 next_btn.setEnabled(false);
                 search_btn.setEnabled(false);
+                add_btn.setEnabled(false);
 
                 edit_btn.setTextColor(Color.WHITE);
                 day_btn.setTextColor(Color.WHITE);
@@ -293,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 day_btn.setEnabled(false);
                 next_btn.setEnabled(false);
                 edit_btn.setEnabled(false);
+                search_btn.setEnabled(false);
 
                 add_btn.setTextColor(Color.WHITE);
                 edit_btn.setTextColor(Color.WHITE);
@@ -359,6 +361,7 @@ public class MainActivity extends AppCompatActivity {
             day_btn.setEnabled(true);
             next_btn.setEnabled(true);
             search_btn.setEnabled(true);
+            add_btn.setEnabled(true);
 
             add_btn.setTextColor(Color.BLACK);
             edit_btn.setTextColor(Color.BLACK);
