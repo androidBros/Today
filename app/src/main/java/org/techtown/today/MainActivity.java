@@ -109,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
                 day_btn.setEnabled(false);
                 next_btn.setEnabled(false);
                 search_btn.setEnabled(false);
+
+                edit_btn.setTextColor(Color.WHITE);
+                day_btn.setTextColor(Color.WHITE);
+
                 onChangeFragment(1);
             }
         });
@@ -202,6 +206,9 @@ public class MainActivity extends AppCompatActivity {
                     search_btn.setEnabled(false);
                     today_btn.setEnabled(false);
 
+                    add_btn.setTextColor(Color.WHITE);
+                    day_btn.setTextColor(Color.WHITE);
+
                     delete_btn.setVisibility(View.VISIBLE);
                     edit_btn.setText("편집취소");
                     delete_show = 1;
@@ -228,6 +235,9 @@ public class MainActivity extends AppCompatActivity {
                     next_btn.setEnabled(true);
                     search_btn.setEnabled(true);
                     today_btn.setEnabled(true);
+
+                    add_btn.setTextColor(Color.BLACK);
+                    day_btn.setTextColor(Color.BLACK);
 
                     checkBox.setVisibility(View.VISIBLE);
                     Log.d("MainActivity", "checkbox 보임--------");
@@ -261,6 +271,11 @@ public class MainActivity extends AppCompatActivity {
                 day_btn.setEnabled(true);
                 next_btn.setEnabled(true);
                 search_btn.setEnabled(true);
+
+                edit_btn.setTextColor(Color.BLACK);
+                add_btn.setTextColor(Color.BLACK);
+                day_btn.setTextColor(Color.BLACK);
+
                 getTime();
                 onChangeFragment(0);
                 fragmentDetach(day);
@@ -279,6 +294,10 @@ public class MainActivity extends AppCompatActivity {
                 day_btn.setEnabled(false);
                 next_btn.setEnabled(false);
                 edit_btn.setEnabled(false);
+
+                add_btn.setTextColor(Color.WHITE);
+                edit_btn.setTextColor(Color.WHITE);
+                day_btn.setTextColor(Color.WHITE);
             }
         });
     }
@@ -341,6 +360,24 @@ public class MainActivity extends AppCompatActivity {
             day_btn.setEnabled(true);
             next_btn.setEnabled(true);
             search_btn.setEnabled(true);
+
+            add_btn.setTextColor(Color.BLACK);
+            edit_btn.setTextColor(Color.BLACK);
+            day_btn.setTextColor(Color.BLACK);
+
+        }
+        if(getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView) == search){
+            edit_btn.setEnabled(true);
+            add_btn.setEnabled(true);
+            back_btn.setEnabled(true);
+            day_btn.setEnabled(true);
+            next_btn.setEnabled(true);
+            search_btn.setEnabled(true);
+
+            add_btn.setTextColor(Color.BLACK);
+            edit_btn.setTextColor(Color.BLACK);
+            day_btn.setTextColor(Color.BLACK);
+
         }
         if(getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView) == day){
             finish();
