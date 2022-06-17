@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
                 edit_btn.setTextColor(Color.WHITE);
                 day_btn.setTextColor(Color.WHITE);
-
                 onChangeFragment(1);
             }
         });

@@ -15,7 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class search extends Fragment {
@@ -23,6 +27,7 @@ public class search extends Fragment {
     TextView search_time;
 
     static MainActivity mactivity;
+    String dow;
 
     List<Integer> search_date_list = new ArrayList<>();
     List<String> search_tasks_list = new ArrayList<>();
@@ -99,7 +104,16 @@ public class search extends Fragment {
         mactivity.next_btn.setEnabled(true);
         mactivity.search_btn.setEnabled(true);
         mactivity.onChangeFragment(0);
-        mactivity.day_btn.setText(date);
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date sd = sdf.parse(date);
+            c.setTime(sd);
+            dow = mactivity.getDayofweek(c.get(Calendar.DAY_OF_WEEK));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        mactivity.day_btn.setText(date+dow);
         Log.d("day", "--------mactivity---------" + mactivity.selected_date);
     }
 }

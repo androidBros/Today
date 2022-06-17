@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/user/Documents/GitHub/Today/app/src/main/res/drawable/back_btn_custom.xml" value="0.259" />
+        <entry key="..\:/Users/user/Documents/GitHub/Today/app/src/main/res/drawable/back_btn_img.xml" value="0.259" />
         <entry key="..\:/Users/user/Documents/GitHub/Today/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/user/Documents/GitHub/Today/app/src/main/res/layout/fragment_add_long.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/user/Documents/GitHub/Today/app/src/main/res/layout/fragment_add_short.xml" value="0.25364583333333335" />
