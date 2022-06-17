@@ -92,6 +92,12 @@ public class search extends Fragment {
     }
     public void go_selected_date(String date, String nojdate){
         mactivity.selected_date = nojdate;
+        mactivity.edit_btn.setEnabled(true);
+        mactivity.add_btn.setEnabled(true);
+        mactivity.back_btn.setEnabled(true);
+        mactivity.day_btn.setEnabled(true);
+        mactivity.next_btn.setEnabled(true);
+        mactivity.search_btn.setEnabled(true);
         mactivity.onChangeFragment(0);
         mactivity.day_btn.setText(date);
         Log.d("day", "--------mactivity---------" + mactivity.selected_date);

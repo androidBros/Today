@@ -2,6 +2,7 @@ package org.techtown.today;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     Calendar myCalendar = Calendar.getInstance();
     String selected_date;
+    String dayofweek;
 
     public static Context mContext;
     public int delete_show;
@@ -134,7 +136,9 @@ public class MainActivity extends AppCompatActivity {
                     selected_date = sdf1.format(c.getTime());
 
                     String selected_date2 = sdf2.format(c.getTime());
-                    day_btn.setText(selected_date2);
+
+                    dayofweek = getDayofweek(c.get(Calendar.DAY_OF_WEEK));
+                    day_btn.setText(selected_date2+dayofweek);
 
 
 
@@ -166,7 +170,9 @@ public class MainActivity extends AppCompatActivity {
                     selected_date = sdf1.format(c.getTime());
 
                     String selected_date2 = sdf2.format(c.getTime());
-                    day_btn.setText(selected_date2);
+
+                    dayofweek = getDayofweek(c.get(Calendar.DAY_OF_WEEK));
+                    day_btn.setText(selected_date2+dayofweek);
 
 
 
@@ -194,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                     day_btn.setEnabled(false);
                     next_btn.setEnabled(false);
                     search_btn.setEnabled(false);
+                    today_btn.setEnabled(false);
 
                     delete_btn.setVisibility(View.VISIBLE);
                     edit_btn.setText("편집취소");
@@ -220,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     day_btn.setEnabled(true);
                     next_btn.setEnabled(true);
                     search_btn.setEnabled(true);
+                    today_btn.setEnabled(true);
 
                     checkBox.setVisibility(View.VISIBLE);
                     Log.d("MainActivity", "checkbox 보임--------");
@@ -279,8 +287,13 @@ public class MainActivity extends AppCompatActivity {
     private void updateLabel() {
         String myFormat = "yyyy-MM-dd";    // 출력형식   2021/07/26
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+
+        dayofweek = getDayofweek(myCalendar.get(Calendar.DAY_OF_WEEK));
+
       //  nojDate = myFormat.replace("-","");
-        day_btn.setText(sdf.format(myCalendar.getTime()));
+        day_btn.setText(sdf.format(myCalendar.getTime())+dayofweek);
+
+        Log.d("MainActivity", "seleceted_date--------------------"+sdf.format(myCalendar.getTime())+dayofweek+"----------------------");
         selected_date = sdf.format(myCalendar.getTime()).replace("-","");
         Log.d("MainActivity", "seleceted_date--------------------"+selected_date+"----------------------");
 
@@ -310,7 +323,8 @@ public class MainActivity extends AppCompatActivity {
         mDate = new Date(mNow);
         Log.d("MainActivity", "mData--------------------"+mDate+"----------------------");
 
-        day_btn.setText(mFormat.format(mDate));
+        dayofweek = getDayofweek(myCalendar.get(Calendar.DAY_OF_WEEK));
+        day_btn.setText(mFormat.format(mDate)+dayofweek);
 
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -352,5 +366,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDatePicker(View view) {
 
+    }
+    public String getDayofweek(int i){
+        if (i == 1) { return "(일)"; }
+        else if (i == 2) { return "(월)"; }
+        else if (i== 3) { return "(화)"; }
+        else if (i== 4) { return "(수)"; }
+        else if (i == 5) { return "(목)"; }
+        else if (i == 6) { return "(금)"; }
+        else { return "(토)"; }
     }
 }
