@@ -37,6 +37,6 @@ TODAYS는 미니멀리즘을 추구하는 투두리스트입니다.
 <br>
 
 ### 구동화면
-![image](https://user-images.githubusercontent.com/66107343/175978965-5787f82f-3fe2-4369-8e2a-c745998054a0.png)
+![image](https://user-images.githubusercontent.com/66107343/175979193-d09cef46-4b57-45ba-aa65-badf604396bd.png)
 
 
