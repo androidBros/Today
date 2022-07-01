@@ -221,18 +221,15 @@ public class add_long extends Fragment {
                 try {
                     startd = sdf.parse(start_d);
                     endd = sdf.parse(end_d);
-                    Log.d("addlong", "start / end ---------------"+startd+endd+"-----------");
-
                     btw = endd.getTime() - startd.getTime();
                     btw = btw / (24*60*60*1000);
                     Log.d("addlong", "start / end ---------------"+startdate+"/"+enddate+"/"+getlongtasks+"/"+days+"-----------");
 
-                    //---------------------------------------------------------------
                     if (getlongtasks.isEmpty() || days.isEmpty() || btw < 0 ){
 
                         Toast.makeText(getContext(),"정보를 정확히 기입해주세요", Toast.LENGTH_LONG).show();
                     }
-                    //--------------------------------------------------------------
+
                     else {
                         c.setTime(startd);
                         for (int i = 0; i < (btw + 1); i++) {
@@ -243,7 +240,6 @@ public class add_long extends Fragment {
 
                                 dbHelper.insertTask(insertdate, insertdate, dayNum, getlongtasks, 0);
                             }
-
                             c.add(Calendar.DATE, 1);
                         }
                     }
@@ -280,10 +276,11 @@ public class add_long extends Fragment {
         });
         return rootView;
     }
+
     private void updateLabel(String str) {
         String myFormat = "yyyy-MM-dd";    // 출력형식   2021/07/26
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
-        //  nojDate = myFormat.replace("-","");
+
         if (str == "start") {
             startdate_btn.setText(sdf.format(myCalendar.getTime()));
             startdate = Integer.parseInt(sdf.format(myCalendar.getTime()).replace("-",""));

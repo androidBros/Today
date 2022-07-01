@@ -42,7 +42,6 @@ public class day extends Fragment {
         MyAdapter adapter = new MyAdapter();
         recyclerView.setAdapter(adapter);
 
-
         DBHelper dbHelper = new DBHelper(getActivity());
         Log.d("day","-------------getActivity---------"+getActivity());
         MainActivity activity = (MainActivity) getActivity();
@@ -78,16 +77,14 @@ public class day extends Fragment {
 
 
     public void update(int check,int id){
-        Log.d("day", "--------update 안에서 mactivity -------------" + mactivity);
+
         if (mactivity!= null) {
             DBHelper dbHelper = new DBHelper(mactivity);
-            Log.d("day", "------getactivity 객체---------------" + mactivity);
             Log.d("day", "--------check    id  -------------" + check + id);
             dbHelper.updateTable(check, id);
         }
         else{
-
-            Log.d("day","------getactivity 객체---------------"+mactivity);
+            Log.d("day","------ update 실패 ---------------");
         }
     }
 
@@ -97,7 +94,6 @@ public class day extends Fragment {
 
         if(context instanceof Activity){
             mactivity = (Activity)context;
-            Log.d("day", "--------mactivity---------" + mactivity);
         }
     }
 }

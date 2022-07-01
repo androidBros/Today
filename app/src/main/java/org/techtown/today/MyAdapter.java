@@ -1,7 +1,5 @@
 package org.techtown.today;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -20,8 +18,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 // adapter에 들어갈 list 입니다.
 
     ArrayList<Data> listData = new ArrayList<>();
-    //ArrayList<Integer> delete_list = new ArrayList<>();
-
     int checked_id;
     public static int tf=0;
 
@@ -89,12 +85,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         private CheckBox task_checkbox;
         private TextView task_item;
         private int id_;
-
-
-
-
         private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);
-
 
         public ItemViewHolder(View itemView) {
             super(itemView);
@@ -133,8 +124,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         }
 
 
-
-
         void onBind(Data data) {
 
             // 편집 선택시 tf : 1 전달 -> tf가 1이면 체크박스 비활성화
@@ -149,10 +138,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
         }
 
-
-
     }
-
-
 
 }

@@ -18,7 +18,8 @@
             android:layout_height="0dp"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="일정을 추가해 주세요 "
+            android:hint="일정을 추가해 주세요 (40글자 내) "
+            android:maxLength="40"
             android:inputType="textPersonName" />
 
         <LinearLayout

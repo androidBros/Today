@@ -385,9 +385,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showDatePicker(View view) {
+    public void showDatePicker(View view) { }
 
-    }
     public String getDayofweek(int i){
         if (i == 1) { return "(일)"; }
         else if (i == 2) { return "(월)"; }

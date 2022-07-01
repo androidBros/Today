@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "startdate int,"
                 + "enddate int,"
                 + "day int,"
-                + "task String,"
+                + "task CHAR(40),"
                 + "exe int)");
 
     }
@@ -53,9 +53,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    // Data 저장 - String startdate, String enddate, String day, String tasks, int exe
+    // Data 저장 - int startdate, int enddate, int day, String tasks, int exe
     public void insertTask(int startdate, int enddate, int day, String tasks, int exe) {
-        //SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
         Log.d("DBHelper", "--------sqliteDatabase writable 전-------" + sqLiteDatabase);
         sqLiteDatabase = getWritableDatabase();
         Log.d("DBHelper", "--------sqliteDatabase writable 후-------" + sqLiteDatabase);
@@ -70,11 +69,10 @@ public class DBHelper extends SQLiteOpenHelper {
             sqlexe = "insert into taskTable"
                     + "(startdate, enddate, day, task, exe)"
                     + "values"
-                    + "('" + startdate + "', '" + enddate + "', '" + day + "', '" + tasks + "', " + exe + ")";
+                    + "(" + startdate + ", " + enddate + ", " + day + ", '" + tasks +"', " + exe + ")";
 
             Log.d("DBHelper", sqlexe);
             sqLiteDatabase.execSQL(sqlexe);
-
             Log.d("DBHelper", "--------------------DB insert 성공----------------------");
 
 
@@ -88,21 +86,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void getTaskDB(String date){
-        //SQLiteDatabase sqLiteDatabaseR = getReadableDatabase();
         sqLiteDatabase = getReadableDatabase();
         id_list.clear();
         check_list.clear();
         tasks_list.clear();
         int Intdate = Integer.parseInt(date);
 
-
-
-
-       // String sqlread = "SELECT * FROM taskTable WHERE startdate = "+Intdate+" AND "+"enddate = "+Intdate;
         String sqlread = "SELECT * FROM taskTable WHERE startdate <= "+Intdate+" AND "+"enddate >= "+Intdate;
         Log.d("DBHelper", "-----------------"+sqlread);
-
-
         Cursor cursor = sqLiteDatabase.rawQuery(sqlread,null);
 
         while (cursor.moveToNext()){
@@ -110,7 +101,6 @@ public class DBHelper extends SQLiteOpenHelper {
             id_list.add(cursor.getInt(0));
             tasks_list.add(cursor.getString(4));
             check_list.add(cursor.getInt(5));
-
         }
     }
 
@@ -118,20 +108,17 @@ public class DBHelper extends SQLiteOpenHelper {
     public void updateTable(int check ,int ID){
         Log.d("DBHelper", "--------updateTable 들어옴---------" + check + " / " + ID);
         Log.d("DBHelper", "--------sqliteDatabase-------" + sqLiteDatabase);
-        //SQLiteDatabase sqLiteDatabaseW = getWritableDatabase();
         sqLiteDatabase = getWritableDatabase();
         Log.d("DBHelper", "--------getWritableDatabase 실행됨---------");
 
         if(taskTable != null){
             try{
-
                 String updateString = "UPDATE taskTable"
                         + " SET"
                         + " exe = " + check
                         + " WHERE _id = "+ ID;
                 Log.d("DBHelper", "---------"+updateString);
                 sqLiteDatabase.execSQL(updateString);
-
             }
             catch (Exception e){
                 e.printStackTrace();

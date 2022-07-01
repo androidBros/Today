@@ -42,14 +42,8 @@ public class search extends Fragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.search_recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rootView.getContext());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//
-//        search_Adapter sa = new search_Adapter();
-//        recyclerView.setAdapter(sa);
 
         DBHelper dbHelper = new DBHelper(getActivity());
-
-
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -67,9 +61,7 @@ public class search extends Fragment {
                     Data data = new Data();
                     data.setDate(search_date_list.get(i));
                     data.setSearchTasks(search_tasks_list.get(i));
-
                     sa.addItem(data);
-                    Log.d("search", "search------------additem 실행됨-----------------");
                 }
 
                 sa.notifyDataSetChanged();
@@ -87,14 +79,16 @@ public class search extends Fragment {
         return rootView;
     }
 
+
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         if(context instanceof Activity){
             mactivity = (MainActivity) getActivity();
-            Log.d("day", "--------mactivity---------" + mactivity);
         }
     }
+
+
     public void go_selected_date(String date, String nojdate){
         mactivity.selected_date = nojdate;
         mactivity.edit_btn.setEnabled(true);
@@ -114,6 +108,5 @@ public class search extends Fragment {
             e.printStackTrace();
         }
         mactivity.day_btn.setText(date+dow);
-        Log.d("day", "--------mactivity---------" + mactivity.selected_date);
     }
 }
